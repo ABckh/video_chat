@@ -1,0 +1,8 @@
+.container li {
+    padding-left: 15px;
+    color: rgba(105, 194, 83, 0.699);
+}
+
+.container li h2 {
+    color: rgb(0, 0, 0);
+}
