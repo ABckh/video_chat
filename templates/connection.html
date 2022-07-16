@@ -50,8 +50,11 @@
         <div class="col-md-6">
           <div class="h-100 p-5 bg-light border rounded-3">
             <h2>Join the meeting</h2>
-            <input type="text" class="form-control input-lg" placeholder="Enter a code of the room...">
-            <button type="button" class="btn btn-dark" style="margin-top: 10px">Join the meeting</button>
+            <form action="/meeting/" method="post">
+              {% csrf_token %}
+            <input type="text" class="form-control input-lg" placeholder="Enter a code of the room..." name="room_code">
+            <input type="submit" class="btn btn-dark" style="margin-top: 10px" value="Join the meeting">
+            </form>
           </div>
         </div>
       </div>
