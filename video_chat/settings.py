@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import environ
 import os 
+import dotenv
+
+dotenv.load_dotenv()
 
 env = environ.Env()
 environ.Env.read_env()
@@ -42,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'connection'
+    'connection',
+    'agora',
 ]
 
 MIDDLEWARE = [

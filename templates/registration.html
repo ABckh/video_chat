@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3 bg-dark" style="margin-top: 50px">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5 bg-dark">
+              <h2 class="text-uppercase text-center mb-5 text-light">Create an account</h2>
+
+              <form class="bg-dark text-light" method="POST" action="{% url 'registration' %}">
+                {% for f in form %}
+                {% csrf_token %}
+                <div class="form-outline mb-4">
+                  {{ f }}
+                  <label class="form-label" for="{{ f.id_for_label }}">{{f.label}}</label>
+                </div>
+                <h5 class="text-danger">{{ f.errors }}</h1>
+                {% endfor %}
+
+            
+                <div class="d-flex justify-content-center">
+                  <button type="submit" value="submit" 
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+
+                <p class="text-center mt-5 mb-0 text-light">Have already an account? 
+                    <a href="{% url 'authentication' %}"
+                    class="fw-bold text-light">Login here</a>
+                </p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
