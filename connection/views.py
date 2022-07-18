@@ -1,9 +1,8 @@
 from django.shortcuts import redirect, render
 import re
-from forms import UserRegisterForm, UserAuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
+from . import forms
 
 def start_page(request):
     if request.user.is_authenticated:
@@ -14,7 +13,7 @@ def start_page(request):
 
 def registration(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST)
+        form = forms.UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
@@ -24,13 +23,13 @@ def registration(request):
             messages.success(request, ("Registration Successful!"))
             return redirect('start_page')
     else:    
-        form = UserRegisterForm()
+        form = forms.UserRegisterForm()
     return render(request, template_name='registration.html', context={'form': form })
 
 
 def authentication(request):
     if request.method == "POST":
-        form = UserAuthenticationForm(request.POST)
+        form = forms.UserAuthenticationForm(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password= password)
@@ -40,10 +39,10 @@ def authentication(request):
             return redirect('start_page')
         else:
             print('password is not right')  
-            return render(request, template_name='login.html', context= {'form': UserAuthenticationForm, 
+            return render(request, template_name='login.html', context= {'form': forms.UserAuthenticationForm, 
             'message': 'Username or password is not right'})
     else:
-        form = UserAuthenticationForm()
+        form = forms.UserAuthenticationForm()
     return render(request, template_name='login.html', context={'form': form})
     
 
