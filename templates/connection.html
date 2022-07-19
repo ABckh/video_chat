@@ -60,8 +60,23 @@
     <script type="text/javascript">
         $("#generate").click(function () {
             var link =  new RandExp(/^http:\/\/localhost\/[a-z]{3}-[a-z]{4}-[a-z]{3}\//).gen();
-            console.log(link);
             $("#modal_body").html(link);
+            $.ajax({
+              
+              type:"POST",
+              url:'/adding_active_link/',
+              data: {
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+                'link': link,
+              },
+              dataType: "json",
+              success: function (data) {
+                console.log("successful")
+              },
+              failure: function () {
+                console.log('failure');
+              }
+            });
         });
       </script>
 {% endblock %}

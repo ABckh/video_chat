@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from . import forms
 
+
 def start_page(request):
     if request.user.is_authenticated:
         return render(request, template_name='connection.html')
@@ -63,8 +64,12 @@ def connection_to_room(request):
             return render(request=request, template_name="room.html", context=context)
 
         else:
-            # return error 
             return render(request=request, template_name="connection.html", context={'error': 'Please, enter a valid meeting-link'})
     else:
-        # if request.method is GET, then just redirect to start_page
         return redirect('start_page')
+
+
+def adding_active_link(request):
+    data = request.POST.dict()
+    print(data['link'])
+    return redirect('start_page')
