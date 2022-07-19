@@ -1,8 +1,25 @@
+from __future__ import print_function
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
+import datetime
 
 
 class Channel(models.Model):
-    is_active = models.BooleanField(default=False)
-    connected_users = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, )
+    link = models.CharField(max_length=35, unique=True)
+    adding_time = models.DateTimeField(default=datetime.datetime.now, blank=True)
+    connected_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
+    @property
+    def auto_delete(self):
+        if self.connected_users is None:
+            if self.adding_time < datetime.datetime.now(self.adding_time.tzinfo)-datetime.timedelta(minutes=5):
+                link = Channel.objects.get(pk=self.pk)
+                link.delete()
+                return True
+            else:
+                return False
+        else: 
+            return False            
+            
+        

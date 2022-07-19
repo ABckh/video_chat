@@ -1,8 +1,11 @@
 from django.shortcuts import redirect, render
-import re
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
+import re
+
 from . import forms
+from .models import Channel
 
 
 def start_page(request):
@@ -56,20 +59,27 @@ def connection_to_room(request):
     if request.POST:
         data = request.POST.dict()
         if bool(re.fullmatch(r"http://localhost/[a-z]{3}-[a-z]{4}-[a-z]{3}/", data['room_code'])):
-            # room_code is existed 
-            # connection to room (redirect to the /meet/room_name)
-            context = {
-                'room_code': data['room_code'],
-            }
-            return render(request=request, template_name="room.html", context=context)
-
+            link = Channel.objects.get(link=data['room_code'])
+            if not link.auto_delete:
+                link.connected_users.add(request.user)
+                link.save()
+                context = {
+                    'room_code': data['room_code'],
+                }
+                return render(request=request, template_name="room.html", context=context)
+            else:
+                return render(request=request, template_name="connection.html", context={'error': 'This link is expired'})
         else:
             return render(request=request, template_name="connection.html", context={'error': 'Please, enter a valid meeting-link'})
     else:
         return redirect('start_page')
+# Add link disconnect, when user is disconnected
 
 
 def adding_active_link(request):
     data = request.POST.dict()
-    print(data['link'])
+    new_record = Channel(link=data['link'], )
+    new_record.save()   
     return redirect('start_page')
+
+

@@ -60,7 +60,7 @@
     <script type="text/javascript">
         $("#generate").click(function () {
             var link =  new RandExp(/^http:\/\/localhost\/[a-z]{3}-[a-z]{4}-[a-z]{3}\//).gen();
-            $("#modal_body").html(link);
+            $("#modal_body").html(link + '<br>' + '<h5 class="text-danger">Warning:</h5><p> Link is active for 5 minutes</p>');
             $.ajax({
               
               type:"POST",
