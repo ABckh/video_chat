@@ -1,4 +1,3 @@
-from __future__ import print_function
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -16,10 +15,11 @@ class Channel(models.Model):
             if self.adding_time < datetime.datetime.now(self.adding_time.tzinfo)-datetime.timedelta(minutes=5):
                 link = Channel.objects.get(pk=self.pk)
                 link.delete()
-                return True
-            else:
                 return False
+            else:
+                return True
         else: 
-            return False            
+            return True            
             
         
+    

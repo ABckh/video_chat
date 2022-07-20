@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -6,6 +6,7 @@ import re
 
 from . import forms
 from .models import Channel
+from .utils import get_object_or_bool_channel
 
 
 def start_page(request):
@@ -59,14 +60,17 @@ def connection_to_room(request):
     if request.POST:
         data = request.POST.dict()
         if bool(re.fullmatch(r"http://localhost/[a-z]{3}-[a-z]{4}-[a-z]{3}/", data['room_code'])):
-            link = Channel.objects.get(link=data['room_code'])
-            if not link.auto_delete:
+            #  link = Channel.objects.get(link=data['room_code'])
+            access = get_object_or_bool_channel(link=data['room_code'])
+            if access:
+                link = Channel.objects.get(link=data['room_code'])
                 link.connected_users.add(request.user)
                 link.save()
-                context = {
-                    'room_code': data['room_code'],
-                }
-                return render(request=request, template_name="room.html", context=context)
+                room_code = data['room_code'] 
+                domain_name = 'localhost'
+                index = room_code.find(domain_name)
+                url = room_code[:index+len(domain_name)] + ':8000/_meet' + room_code[index+len(domain_name):]
+                return redirect(url) 
             else:
                 return render(request=request, template_name="connection.html", context={'error': 'This link is expired'})
         else:
@@ -82,4 +86,7 @@ def adding_active_link(request):
     new_record.save()   
     return redirect('start_page')
 
+
+def open_chat_window(request, room_code):
+    return render(request, template_name='room.html', context={'room_code': room_code})
 
