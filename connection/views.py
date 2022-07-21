@@ -4,7 +4,7 @@ from django.contrib import messages
 
 import re
 
-from . import forms
+from .forms import UserRegisterForm, UserAuthenticationForm
 from .models import Channel
 from .utils import get_object_or_bool_channel
 
@@ -18,7 +18,7 @@ def start_page(request):
 
 def registration(request):
     if request.method == "POST":
-        form = forms.UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
@@ -28,13 +28,13 @@ def registration(request):
             messages.success(request, ("Registration Successful!"))
             return redirect('start_page')
     else:    
-        form = forms.UserRegisterForm()
+        form = UserRegisterForm()
     return render(request, template_name='registration.html', context={'form': form })
 
 
 def authentication(request):
     if request.method == "POST":
-        form = forms.UserAuthenticationForm(request.POST)
+        form = UserAuthenticationForm(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password= password)
@@ -44,10 +44,10 @@ def authentication(request):
             return redirect('start_page')
         else:
             print('password is not right')  
-            return render(request, template_name='login.html', context= {'form': forms.UserAuthenticationForm, 
+            return render(request, template_name='login.html', context= {'form': UserAuthenticationForm, 
             'message': 'Username or password is not right'})
     else:
-        form = forms.UserAuthenticationForm()
+        form = UserAuthenticationForm()
     return render(request, template_name='login.html', context={'form': form})
     
 
@@ -85,8 +85,3 @@ def adding_active_link(request):
     new_record = Channel(link=data['link'], )
     new_record.save()   
     return redirect('start_page')
-
-
-def open_chat_window(request, room_code):
-    return render(request, template_name='room.html', context={'room_code': room_code})
-

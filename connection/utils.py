@@ -1,4 +1,3 @@
-import cgi
 from .models import Channel
 
 
