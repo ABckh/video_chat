@@ -85,3 +85,7 @@ def adding_active_link(request):
     new_record = Channel(link=data['link'], )
     new_record.save()   
     return redirect('start_page')
+
+
+def chat_window(request, room_code):
+    return render(request, template_name='chat_window.html', context={'room_code': room_code})

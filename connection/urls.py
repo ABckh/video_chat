@@ -9,6 +9,7 @@ urlpatterns = [
     path('authentication/', views.authentication, name='authentication'),
     path('logout/', views.logout_view, name='logout_view'),
     path('adding_active_link/', views.adding_active_link, name='adding_active_link'),
+    path('_meet/<str:room_code>/', views.chat_window, name='chat_window')
 
 ]
 

@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{% csrf_token %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css">
+    <title>Video chat</title>
+</head>
+<body class="bg-dark">
+
+    <!-- header-->
+      <header class="p-3 bg-dark text-ba border-bottom">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="{% url 'start_page' %}" class="d-flex mb-lg-0 text-decoration-none">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li> <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" class="text-success"  fill="currentColor" class="bi bi-camera-reels" viewBox="0 0 16 16">
+                <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM1 3a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/>
+                <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7zm6 8.73V7.27l-3.5 1.555v4.35l3.5 1.556zM1 8v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1z"/>
+                <path d="M9 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM7 3a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                   </svg> 
+            </li>
+              <li> <h2 class="text-light"> Video chat</h2> </li>
+          </a>
+            
+            </ul>
+            {% if user.is_authenticated %}
+            <h4 class="text-light" style="margin-right:15px; margin-top: 10px;">{{ user.username }}</h4> 
+            <div class="text-end">
+              <a href="{% url 'logout_view' %}">
+                <button type="button" class="btn btn-success">Logout</button>
+              </a>
+            </div>
+           {% else %}
+           <div class="text-end">
+            <a href="{% url 'registration' %}">
+            <button type="button"  class="btn btn-success">Signup</button>
+            </a>  
+          </div>
+          <div class="text-end">
+            <a href="{% url 'authentication' %}">
+            <button type="button" class="btn border-light text-light" style="margin-left: 5px">Login</button>
+            </a>
+          </div>
+
+           {% endif %}
+            
+            <!--  if request.user.is_authenticated 
+            
+           elif 
+           <div class="text-end">
+            <button type="button" class="btn btn-success">Login</button>
+           </div>
+            endif -->
+         </div>
+        </div>
+      </header>
+      {% block content %}{% endblock %}
+      {% block scripts %} {% endblock %}
+    </body>
+    </html>
+    
