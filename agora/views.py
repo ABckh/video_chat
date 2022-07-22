@@ -5,11 +5,10 @@ from django.http import HttpResponse
 
 
 class AgoraVideoCall(View):
-    app_id=''
+    app_id='a92dcfe3b54442f29716549a58080bf9'
     channel = ''
     permission_class = 'AllowAny'
-    channel_end_url = '/success/'
-    title = 'Agora Demo'
+    channel_end_url = '/'
 
     def get_permission(self,request,permission_class):
         if permission_class == 'AllowAny':
@@ -34,7 +33,7 @@ class AgoraVideoCall(View):
             return True
 
     def checkAll(self,request):
-        if self.get_permission(request,self.permission_class) == True and self.checkAppID(self.app_id) == True  and self.checkChannel(self.channel) == True:
+        if self.get_permission(request,self.permission_class) == True and self.checkChannel(self.channel) == True:
             return True
         else:
             return False
@@ -48,12 +47,11 @@ class AgoraVideoCall(View):
                     'agora_id':self.app_id,
                     'channel':self.channel,
                     'channel_end_url':self.channel_end_url,
-                    'title':self.title
                     })
         else:
-            if not self.checkAppID(self.app_id):
-                return HttpResponse('Programming Error: No App ID')
-            elif not self.get_permissions(request):
+            # if not self.checkAppID(self.app_id):
+            #     return HttpResponse('Programming Error: No App ID')
+            if not self.get_permissions(request):
                 return HttpResponse('User Permission Error: No Permission')
             elif not self.checkChannel(request,self.channel):
                 return HttpResponse('Programming Error: No Channel Name')
@@ -63,10 +61,8 @@ class AgoraVideoCall(View):
 # allowed_permissions = ['AllowAny','IsAuthenticated','IsAdmin']
 
 class Agora(AgoraVideoCall):
-    app_id=''
+    app_id='a92dcfe3b54442f29716549a58080bf9'
     channel = ''
     permission_class = 'AllowAny'
-    channel_end_url = '/success/'
-    title = 'Agora Demo'
-
+    channel_end_url = '/'
 

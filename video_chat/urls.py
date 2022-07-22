@@ -8,10 +8,6 @@ from agora.views import Agora
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('connection.urls')),
-    path('agora/', Agora.as_view(
-        app_id='a92dcfe3b54442f29716549a58080bf9',
-        channel='123',
-    ))
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

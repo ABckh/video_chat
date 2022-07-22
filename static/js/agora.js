@@ -292,5 +292,5 @@ function leaveChannel() {
 
 // use tokens for added security
 function generateToken() {
-    return '006a92dcfe3b54442f29716549a58080bf9IABtSezY7pkqNhc2mz2joqAprEjS7TmnFq5GSWLaVv8+6dJjSIgAAAAAEAAtDEjT2ofaYgEAAQDah9pi'; // TODO: add a token generation
+    return '006a92dcfe3b54442f29716549a58080bf9IACjaxl65F3JsDtqOA/U+RxfEfSO8lr6FiyMoRTV28JYjRw69csAAAAAEAAtDEjTK+TbYgEAAQAr5Nti'; // TODO: add a token generation
 }

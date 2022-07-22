@@ -1,3 +1,4 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -7,6 +8,8 @@ import re
 from .forms import UserRegisterForm, UserAuthenticationForm
 from .models import Channel
 from .utils import get_object_or_bool_channel
+
+from agora.views import Agora, AgoraVideoCall
 
 
 def start_page(request):
@@ -88,4 +91,5 @@ def adding_active_link(request):
 
 
 def chat_window(request, room_code):
-    return render(request, template_name='chat_window.html', context={'room_code': room_code})
+    return Agora.as_view(channel=f'{room_code}')(request)
+    
