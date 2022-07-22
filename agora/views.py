@@ -65,8 +65,7 @@ class AgoraVideoCall(View):
                     'user_id': self.uid,
                     })
         else:
-            # if not self.checkAppID(self.app_id):
-            #     return HttpResponse('Programming Error: No App ID')
+
             if not self.get_permissions(request):
                 return HttpResponse('User Permission Error: No Permission')
             elif not self.checkChannel(request,self.channel):
@@ -74,7 +73,6 @@ class AgoraVideoCall(View):
             return HttpResponse('Unknown Error')
         
 
-# allowed_permissions = ['AllowAny','IsAuthenticated','IsAdmin']
 
 class Agora(AgoraVideoCall):
     app_id='a92dcfe3b54442f29716549a58080bf9'
