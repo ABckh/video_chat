@@ -27,11 +27,12 @@ var localStreams = {
 var mainStreamId; // reference to main stream
 var screenShareActive = false; // flag for screen share 
 
-function initClientAndJoinChannel(agoraAppId, channelName) {
+function initClientAndJoinChannel(agoraAppId, channelName, token, userID) {
     // init Agora SDK
     client.init(agoraAppId, function () {
         console.log("AgoraRTC client initialized");
-        joinChannel(channelName); // join channel upon successfull init
+        joinChannel(channelName, token, userID); 
+        // join channel upon successfull init
     }, function (err) {
         console.log("[ERROR] : AgoraRTC client init failed", err);
     });
@@ -115,9 +116,8 @@ client.on("unmute-video", function (evt) {
 });
 
 // join a channel
-function joinChannel(channelName) {
-    var token = generateToken();
-    var userID = null; // set to null to auto generate uid on successfull connection
+function joinChannel(channelName, token, userID) {
+// set to null to auto generate uid on successfull connection
     client.join(token, channelName, userID, function (uid) {
         console.log("User " + uid + " join channel successfully");
         createCameraStream(uid);
@@ -290,7 +290,7 @@ function leaveChannel() {
     });
 }
 
-// use tokens for added security
-function generateToken() {
-    return '006a92dcfe3b54442f29716549a58080bf9IACjaxl65F3JsDtqOA/U+RxfEfSO8lr6FiyMoRTV28JYjRw69csAAAAAEAAtDEjTK+TbYgEAAQAr5Nti'; // TODO: add a token generation
-}
+// // use tokens for added security
+// function generateToken(token) {
+//     return token; // TODO: add a token generation
+// }

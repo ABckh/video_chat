@@ -3,7 +3,7 @@
 $("#join-channel").click(function (event) {
     var agoraAppId = "a6af85f840ef43108491705e2315a857";
     var channelName = $('#form-channel').val();
-    initClientAndJoinChannel(agoraAppId, channelName);
+    initClientAndJoinChannel(agoraAppId, channelName, token);
     $("#modalForm").modal("hide");
 });
 

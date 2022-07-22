@@ -1,5 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -8,9 +7,10 @@ import re
 from .forms import UserRegisterForm, UserAuthenticationForm
 from .models import Channel
 from .utils import get_object_or_bool_channel
+from agora.views import Agora
 
-from agora.views import Agora, AgoraVideoCall
 
+DOMAIN_NAME = 'https://a93f-151-249-166-94.eu.ngrok.io/'
 
 def start_page(request):
     if request.user.is_authenticated:
@@ -72,7 +72,8 @@ def connection_to_room(request):
                 room_code = data['room_code'] 
                 domain_name = 'localhost'
                 index = room_code.find(domain_name)
-                url = room_code[:index+len(domain_name)] + ':8000/_meet' + room_code[index+len(domain_name):]
+                # url = room_code[:index+len(domain_name)] + ':8000/_meet' + room_code[index+len(domain_name):]
+                url = DOMAIN_NAME + f'_meet{room_code[index+len(domain_name):]}'
                 return redirect(url) 
             else:
                 return render(request=request, template_name="connection.html", context={'error': 'This link is expired'})
@@ -85,11 +86,15 @@ def connection_to_room(request):
 
 def adding_active_link(request):
     data = request.POST.dict()
+    print(data)
     new_record = Channel(link=data['link'], )
     new_record.save()   
     return redirect('start_page')
 
 
 def chat_window(request, room_code):
-    return Agora.as_view(channel=f'{room_code}')(request)
+    # rtc token generation 
+
+
+    return Agora.as_view(channel=f'{room_code}',uid=request.user.id)(request)
     
