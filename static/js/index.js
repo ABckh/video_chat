@@ -1,5 +1,3 @@
-
-// join channel modal
 $("#join-channel").click(function (event) {
     var agoraAppId = "a6af85f840ef43108491705e2315a857";
     var channelName = $('#form-channel').val();
@@ -7,7 +5,6 @@ $("#join-channel").click(function (event) {
     $("#modalForm").modal("hide");
 });
 
-// UI buttons
 function enableUiControls(localStream) {
 
     $("#mic-btn").prop("disabled", false);
@@ -24,8 +21,8 @@ function enableUiControls(localStream) {
     });
 
     $("#screen-share-btn").click(function () {
-        toggleScreenShareBtn(); // set screen share button icon
-        $("#screen-share-btn").prop("disabled", true); // disable the button on click
+        toggleScreenShareBtn();
+        $("#screen-share-btn").prop("disabled", true); 
         if (screenShareActive) {
             stopScreenShare();
         } else {
@@ -37,7 +34,6 @@ function enableUiControls(localStream) {
         leaveChannel();
     });
 
-    // keyboard listeners 
     $(document).keypress(function (e) {
         switch (e.key) {
             case "m":
@@ -50,8 +46,8 @@ function enableUiControls(localStream) {
                 break;
             case "s":
                 console.log("initializing screen share");
-                toggleScreenShareBtn(); // set screen share button icon
-                $("#screen-share-btn").prop("disabled", true); // disable the button on click
+                toggleScreenShareBtn(); 
+                $("#screen-share-btn").prop("disabled", true);
                 if (screenShareActive) {
                     stopScreenShare();
                 } else {
@@ -62,12 +58,12 @@ function enableUiControls(localStream) {
                 console.log("so sad to see you quit the channel");
                 leaveChannel();
                 break;
-            default:  // do nothing
+            default: 
         }
 
-        // (for testing) 
+     
         if (e.key === "r") {
-            window.history.back(); // quick reset
+            window.history.back();
         }
     });
 }
@@ -90,25 +86,25 @@ function toggleVisibility(elementID, visible) {
 }
 
 function toggleMic(localStream) {
-    toggleBtn($("#mic-btn")); // toggle button colors
-    $("#mic-icon").toggleClass('fa-microphone').toggleClass('fa-microphone-slash'); // toggle the mic icon
+    toggleBtn($("#mic-btn")); 
+    $("#mic-icon").toggleClass('fa-microphone').toggleClass('fa-microphone-slash');
     if ($("#mic-icon").hasClass('fa-microphone')) {
-        localStream.unmuteAudio(); // enable the local mic
-        toggleVisibility("#mute-overlay", false); // hide the muted mic icon
+        localStream.unmuteAudio(); 
+        toggleVisibility("#mute-overlay", false); 
     } else {
-        localStream.muteAudio(); // mute the local mic
-        toggleVisibility("#mute-overlay", true); // show the muted mic icon
+        localStream.muteAudio(); 
+        toggleVisibility("#mute-overlay", true); 
     }
 }
 
 function toggleVideo(localStream) {
-    toggleBtn($("#video-btn")); // toggle button colors
-    $("#video-icon").toggleClass('fa-video').toggleClass('fa-video-slash'); // toggle the video icon
+    toggleBtn($("#video-btn")); 
+    $("#video-icon").toggleClass('fa-video').toggleClass('fa-video-slash'); 
     if ($("#video-icon").hasClass('fa-video')) {
-        localStream.unmuteVideo(); // enable the local video
-        toggleVisibility("#no-local-video", false); // hide the user icon when video is enabled
+        localStream.unmuteVideo();
+        toggleVisibility("#no-local-video", false); 
     } else {
-        localStream.muteVideo(); // disable the local video
-        toggleVisibility("#no-local-video", true); // show the user icon when video is disabled
+        localStream.muteVideo();
+        toggleVisibility("#no-local-video", true);
     }
 }
