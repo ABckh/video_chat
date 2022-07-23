@@ -133,6 +133,11 @@ function createCameraStream(uid) {
 }
 
 function leaveChannel() {
+
+    if (screenShareActive) {
+        stopScreenShare();
+    }
+
     client.leave(function () {
         console.log("client leaves channel");
         localStreams.camera.stream.stop() 
@@ -141,6 +146,7 @@ function leaveChannel() {
         $("#remote-streams").empty() 
         $("#mic-btn").prop("disabled", true);
         $("#video-btn").prop("disabled", true);
+        $("#screen-share-btn").prop("disabled", true);
         $("#exit-btn").prop("disabled", true);
         toggleVisibility("#mute-overlay", false);
         toggleVisibility("#no-local-video", false);

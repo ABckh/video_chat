@@ -19,7 +19,7 @@ function enableUiControls(localStream) {
     $(document).keypress(function (e) {
         switch (e.key) {
             case "m":
-                console.log("squick toggle the mic");
+                console.log("quick toggle the mic");
                 toggleMic(localStream);
                 break;
             case "v":
