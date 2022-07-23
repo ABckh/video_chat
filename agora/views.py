@@ -19,7 +19,7 @@ class AgoraVideoCall(View):
     privilegeExpiredTs = currentTimestamp + expire_time
 
 
-    channel_end_url = '/'
+    channel_end_url = f'/disconnect/'
 
     def get_permission(self,request,permission_class):
         if permission_class == 'AllowAny':
@@ -53,16 +53,19 @@ class AgoraVideoCall(View):
     def get(self,request):
         stat = self.checkAll(request)
         if stat:
-            token = RtcTokenBuilder.buildTokenWithUid(self.app_id,self.appCertificate, self.channel, self.uid, Role_Attendee, self.privilegeExpiredTs)
-            print(self.channel, token)
+            if request.user.is_authenticated:
+                token = RtcTokenBuilder.buildTokenWithUid(self.app_id,self.appCertificate, self.channel, self.uid, Role_Attendee, self.privilegeExpiredTs)
+                print(self.channel, token)
 
-            return render(request,'index.html',{
-                    'agora_id':self.app_id,
-                    'channel':self.channel,
-                    'channel_end_url':self.channel_end_url,
-                    'token': token,
-                    'user_id': self.uid,
-                    })
+                return render(request,'index.html',{
+                        'agora_id':self.app_id,
+                        'channel':self.channel,
+                        'channel_end_url': f'/disconnect/{self.channel}/',
+                        'token': token,
+                        'user_id': self.uid,
+                        })
+            else:
+                return redirect('registration')
         else:
 
             if not self.get_permissions(request):
@@ -81,5 +84,5 @@ class Agora(AgoraVideoCall):
     expire_time = 3600
     currentTimestamp = int(time.time())
     privilegeExpiredTs = currentTimestamp + expire_time
-    channel_end_url = '/'
+    channel_end_url = f'/disconnect/'
 
