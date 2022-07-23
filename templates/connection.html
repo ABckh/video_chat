@@ -45,6 +45,7 @@
           <div class="modal-footer border-dark">
             <button type="button" class="btn btn-dark border-light" data-bs-dismiss="modal">Close</button>
           </div>
+          
         </div>
       </div>
     </div>
@@ -60,9 +61,9 @@
     <script type="text/javascript">
         $("#generate").click(function () {
             var link =  new RandExp(/^http:\/\/localhost\/[a-z]{3}-[a-z]{4}-[a-z]{3}\//).gen();
-            $("#modal_body").html(link + '<br>' + '<h5 class="text-danger">Warning:</h5><p> Link is active for 5 minutes</p>');
+            $("#modal_body").html('<button class="btn btn-dark" onclick="copyFunction()"><i style="font-size:24px" class="fa">&#xf0c5;</i></button><span id="textToCopy">' + link + '</span><br><h5 class="text-danger">Warning:</h5><p> Link is active for 5 minutes</p>');
             $.ajax({
-              
+      
               type:"POST",
               url:'/adding_active_link/',
               data: {
@@ -78,5 +79,11 @@
               }
             });
         });
+
+        function copyFunction() {
+          var copyText = document.getElementById('textToCopy').innerText;
+          navigator.clipboard.writeText(copyText);
+        }
+
       </script>
 {% endblock %}

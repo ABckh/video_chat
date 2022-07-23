@@ -10,7 +10,7 @@ from connection.agora_key.RtcTokenBuilder import RtcTokenBuilder, Role_Attendee
 
 class AgoraVideoCall(View):
     app_id='a92dcfe3b54442f29716549a58080bf9'
-    appCertificate = '43e2c04734274caf9b9461570643e9f7'
+    appCertificate = '43e2c04734274caf9b9461570643e9f7' 
     channel = ''
     permission_class = 'AllowAny'
     uid = '' # User ID
@@ -52,10 +52,9 @@ class AgoraVideoCall(View):
 
     def get(self,request):
         stat = self.checkAll(request)
-        print(self.app_id,self.channel)
         if stat:
             token = RtcTokenBuilder.buildTokenWithUid(self.app_id,self.appCertificate, self.channel, self.uid, Role_Attendee, self.privilegeExpiredTs)
-            print(token)
+            print(self.channel, token)
 
             return render(request,'index.html',{
                     'agora_id':self.app_id,

@@ -17,11 +17,6 @@
 <body>
     <div class="container-fluid p-0">
         <div id="main-container">
-            <div id="screen-share-btn-container" class="col-2 float-right text-right mt-2">
-                <button id="screen-share-btn" type="button" class="btn btn-lg">
-                    <i id="screen-share-icon" class="fas fa-share-square"></i>
-                </button>
-            </div>
             <div id="buttons-container" class="row justify-content-center mt-3">
                 <div class="col-md-2 text-center">
                     <button id="mic-btn" type="button" class="btn btn-block btn-dark btn-lg">
@@ -70,7 +65,6 @@
 <script type="text/javascript">
     $("#mic-btn").prop("disabled", true);
     $("#video-btn").prop("disabled", true);
-    $("#screen-share-btn").prop("disabled", true);
     $("#exit-btn").prop("disabled", true);
 
     $(document).ready(function () {
@@ -79,7 +73,6 @@
         var token = '{{ token }}';
         var userID = '{{ user_id  }}'
         initClientAndJoinChannel(agoraAppId, channelName, token, userID);
-        // generateToken(token);
     });
 </script>
 <script src="{% static 'js/index.js' %}"></script>

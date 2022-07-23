@@ -10,7 +10,7 @@ from .utils import get_object_or_bool_channel
 from agora.views import Agora
 
 
-DOMAIN_NAME = 'https://a93f-151-249-166-94.eu.ngrok.io/'
+DOMAIN_NAME = 'https://4416-151-249-166-94.eu.ngrok.io/'
 
 def start_page(request):
     if request.user.is_authenticated:
@@ -86,7 +86,6 @@ def connection_to_room(request):
 
 def adding_active_link(request):
     data = request.POST.dict()
-    print(data)
     new_record = Channel(link=data['link'], )
     new_record.save()   
     return redirect('start_page')
@@ -95,6 +94,5 @@ def adding_active_link(request):
 def chat_window(request, room_code):
     # rtc token generation 
 
-
     return Agora.as_view(channel=f'{room_code}',uid=request.user.id)(request)
-    
+        
