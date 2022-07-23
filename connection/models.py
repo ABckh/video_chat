@@ -12,7 +12,7 @@ class Channel(models.Model):
     @property
     def auto_delete(self):
         # add connected 0 or 1
-        if self.connected_users.count() == 0:
+        if self.connected_users.count() == 0 or self.connected_users.count() == 1:
             if self.adding_time < datetime.datetime.now(self.adding_time.tzinfo)-datetime.timedelta(minutes=5):
                 print('time is')
                 link = Channel.objects.get(pk=self.pk)

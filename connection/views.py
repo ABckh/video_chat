@@ -9,7 +9,7 @@ from .utils import get_object_or_bool_channel
 from agora.views import Agora
 
 
-DOMAIN_NAME = 'https://9695-151-249-166-94.eu.ngrok.io'
+DOMAIN_NAME = 'https://9695-151-249-166-94.eu.ngrok.io/'
 
 def start_page(request):
     if request.user.is_authenticated:
