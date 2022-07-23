@@ -11,7 +11,7 @@ class Channel(models.Model):
 
     @property
     def auto_delete(self):
-        if self.connected_users is None:
+        if self.connected_users is None or self.connected_users.count() == 1:
             if self.adding_time < datetime.datetime.now(self.adding_time.tzinfo)-datetime.timedelta(minutes=5):
                 link = Channel.objects.get(pk=self.pk)
                 link.delete()

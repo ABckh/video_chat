@@ -1,8 +1,11 @@
+from os import link
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 import re
+
+from django.template import TemplateSyntaxError
 
 from .forms import UserRegisterForm, UserAuthenticationForm
 from .models import Channel
@@ -10,7 +13,7 @@ from .utils import get_object_or_bool_channel
 from agora.views import Agora
 
 
-DOMAIN_NAME = 'https://4416-151-249-166-94.eu.ngrok.io/'
+DOMAIN_NAME = 'https://7342-151-249-166-94.eu.ngrok.io/'
 
 def start_page(request):
     if request.user.is_authenticated:
@@ -62,21 +65,17 @@ def logout_view(request):
 def connection_to_room(request):
     if request.POST:
         data = request.POST.dict()
-        if bool(re.fullmatch(r"http://localhost/[a-z]{3}-[a-z]{4}-[a-z]{3}/", data['room_code'])):
-            #  link = Channel.objects.get(link=data['room_code'])
-            access = get_object_or_bool_channel(link=data['room_code'])
-            if access:
-                link = Channel.objects.get(link=data['room_code'])
-                link.connected_users.add(request.user)
-                link.save()
-                room_code = data['room_code'] 
-                domain_name = 'localhost'
-                index = room_code.find(domain_name)
-                # url = room_code[:index+len(domain_name)] + ':8000/_meet' + room_code[index+len(domain_name):]
-                url = DOMAIN_NAME + f'_meet{room_code[index+len(domain_name):]}'
-                return redirect(url) 
-            else:
-                return render(request=request, template_name="connection.html", context={'error': 'This link is expired'})
+        access = get_object_or_bool_channel(link=data['room_code'])
+        if access:
+            link = Channel.objects.get(link=data['room_code'])
+            link.connected_users.add(request.user)
+            link.save()
+            room_code = data['room_code'] 
+            domain_name = 'localhost'
+            index = room_code.find(domain_name)
+            # url = room_code[:index+len(domain_name)] + ':8000/_meet' + room_code[index+len(domain_name):]
+            url = DOMAIN_NAME + f'_meet{room_code[index+len(domain_name):]}'
+            return redirect(url) 
         else:
             return render(request=request, template_name="connection.html", context={'error': 'Please, enter a valid meeting-link'})
     else:
@@ -92,7 +91,9 @@ def adding_active_link(request):
 
 
 def chat_window(request, room_code):
-    # rtc token generation 
-
-    return Agora.as_view(channel=f'{room_code}',uid=request.user.id)(request)
-        
+    link = f'http://localhost/{room_code}/' 
+    access = get_object_or_bool_channel(link=link)
+    if access:
+        return Agora.as_view(channel=f'{room_code}', uid=request.user.id)(request)
+    else:
+        return render(request, template_name='connection.html', context={'error': 'Please, enter a valid meeting-link'})
