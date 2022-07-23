@@ -77,6 +77,7 @@ def connection_to_room(request):
             return render(request=request, template_name="connection.html", context={'error': 'Please, enter a valid meeting-link',})
     else:
         return redirect('start_page')
+# Add link disconnect, when user is disconnected
 
 
 def adding_active_link(request):
@@ -85,7 +86,7 @@ def adding_active_link(request):
         new_record = Channel(link=data['link'], )
         new_record.save()   
     return redirect('start_page')
-    
+
 
 def chat_window(request, room_code):
     if request.user.is_authenticated:
@@ -98,10 +99,10 @@ def chat_window(request, room_code):
     else:
         return redirect('registration')
 
-
 def disconnect(request, room_code):
     link = f'http://localhost/{room_code}/'
     access = get_object_or_bool_channel(link=link)
     if access:
-        link.connected_users.remove(request.user)
+        channel = Channel.objects.get(link=link)
+        channel.connected_users.remove(request.user)
     return redirect('start_page')
