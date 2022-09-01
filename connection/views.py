@@ -9,7 +9,7 @@ from .utils import get_object_or_bool_channel
 from agora.views import Agora
 
 
-DOMAIN_NAME = 'https://9695-151-249-166-94.eu.ngrok.io/'
+DOMAIN_NAME = 'https://8684-151-249-166-94.eu.ngrok.io/'
 
 def start_page(request):
     if request.user.is_authenticated:
@@ -98,6 +98,7 @@ def chat_window(request, room_code):
             return render(request, template_name='connection.html', context={'error': 'Please, enter a valid meeting-link'})
     else:
         return redirect('registration')
+
 
 def disconnect(request, room_code):
     link = f'http://localhost/{room_code}/'
