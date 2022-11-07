@@ -2,9 +2,10 @@
 
 This is  video chat application, Google meet clone.
 Here you can try this application: https://videochatgooglemeetclone.herokuapp.com/
-<img width="1512" alt="Screenshot 2022-11-07 at 19 23 08" src="https://user-images.githubusercontent.com/88387714/200376070-92594709-7c60-45ff-8236-5b95f0552ab2.png">
-<img width="1512" alt="Screenshot 2022-11-07 at 19 23 11" src="https://user-images.githubusercontent.com/88387714/200376081-dbeec871-9653-49f5-862d-23a61bf0de49.png">
-<img width="1512" alt="Screenshot 2022-11-07 at 19 23 42" src="https://user-images.githubusercontent.com/88387714/200376098-41b6cd48-9735-4708-aea5-d3b1f7a8e1b8.png">
-<img width="1512" alt="Screenshot 2022-11-07 at 19 23 51" src="https://user-images.githubusercontent.com/88387714/200376140-750830f9-3623-4233-8dbe-10793724f531.png">
-<img width="1512" alt="Screenshot 2022-11-07 at 19 24 15" src="https://user-images.githubusercontent.com/88387714/200376163-3d165e94-ade3-4976-8875-cdc4d6b066da.png">
-<img width="1512" alt="Screenshot 2022-11-07 at 19 29 57" src="https://user-images.githubusercontent.com/88387714/200376183-2619da2b-73d1-4552-bc29-c152c5faa94d.png">
+
+<img width="1368" alt="Screenshot 2022-11-07 at 19 35 46" src="https://user-images.githubusercontent.com/88387714/200377664-84ee4e96-38b0-4b22-95c6-6824eeadaeb5.png">
+<img width="1307" alt="Screenshot 2022-11-07 at 19 36 29" src="https://user-images.githubusercontent.com/88387714/200377671-efb64f9f-8e5f-487c-b462-553dda303782.png">
+<img width="1312" alt="Screenshot 2022-11-07 at 19 37 03" src="https://user-images.githubusercontent.com/88387714/200377685-b7b13563-3d3f-470f-a26f-b1cea60e4b3d.png">
+<img width="1310" alt="Screenshot 2022-11-07 at 19 37 26" src="https://user-images.githubusercontent.com/88387714/200377692-4290ada1-ce56-47e3-abfa-7ee05c17107a.png">
+<img width="1308" alt="Screenshot 2022-11-07 at 19 37 58" src="https://user-images.githubusercontent.com/88387714/200377708-878b182b-f12a-4066-a246-4b4b84471ea1.png">
+<img width="1308" alt="Screenshot 2022-11-07 at 19 38 20" src="https://user-images.githubusercontent.com/88387714/200377716-07ef2587-1f9a-414d-bad8-305d1a6be945.png">
