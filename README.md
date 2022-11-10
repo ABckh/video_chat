@@ -16,11 +16,13 @@ Here you can try this application: https://videochatgooglemeetclone.herokuapp.co
 * This is the pop up where you can copy the meeting code:
 <img width="1310" alt="Screenshot 2022-11-07 at 19 37 26" src="https://user-images.githubusercontent.com/88387714/200377692-4290ada1-ce56-47e3-abfa-7ee05c17107a.png">
 
-*
+* Here user can paste the meeting code to "Join the meeting" field:
 <img width="1308" alt="Screenshot 2022-11-07 at 19 37 58" src="https://user-images.githubusercontent.com/88387714/200377708-878b182b-f12a-4066-a246-4b4b84471ea1.png">
 
-*
+* This is the page after 2 people were connected to the meeting:
 <img width="1308" alt="Screenshot 2022-11-07 at 19 38 20" src="https://user-images.githubusercontent.com/88387714/200377716-07ef2587-1f9a-414d-bad8-305d1a6be945.png">
 
 * It is the 404 handler (works only when DEBUG = False):
 <img width="1509" alt="Screenshot 2022-11-10 at 18 00 48" src="https://user-images.githubusercontent.com/88387714/201146138-df17e2c5-1394-4adc-812d-698858861476.png">
+
+Thank you for your time!
