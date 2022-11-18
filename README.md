@@ -1,6 +1,6 @@
 # Google meet clone 
 
-This is  video chat application, Google meet clone (works in Firefox).
+This is  video chat application, Google meet clone (works only in Firefox).
 
 Here you can try this application: https://videochatgooglemeetclone.herokuapp.com/
 
